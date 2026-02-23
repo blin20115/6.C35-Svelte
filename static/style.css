@@ -1,0 +1,136 @@
+:root {
+  --color-accent: oklch(24.978% 0.11284 287.497);
+}
+
+html {
+  accent-color: var(--color-accent);
+}
+
+body {
+  font: 100%/1.5 system-ui;
+  max-width: 100ch;
+  margin-inline: auto;
+  padding: 5ch;
+}
+
+nav ul,
+nav ul li {
+  display: contents;
+}
+
+nav {
+  display: flex;
+  margin-bottom: 1em;
+  border-bottom: 1px solid oklch(80% 3% 200);
+}
+
+nav a {
+  flex: 1;
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+  padding: 0.5em;
+  border-bottom: 0.4em solid transparent;
+}
+
+nav a.current {
+  border-bottom: 0.4em solid oklch(80% 3% 200);
+  padding-bottom: 0.1em;
+}
+
+nav a:hover {
+  border-bottom: 0.4em solid var(--color-accent);
+  background-color: oklch(from var(--color-accent) 95% 5% h);
+  padding-bottom: 0.1em;
+}
+
+input,
+textarea,
+button,
+select {
+  font: inherit;
+}
+
+form {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 1em;
+}
+
+form label {
+  display: grid;
+  grid-template-columns: subgrid;
+  grid-column: 1 / -1;
+  align-items: center;
+}
+
+form button {
+  grid-column: 1 / -1;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.projects {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15em, 1fr));
+  gap: 1em;
+}
+
+article {
+  display: grid;
+  grid-template-rows: subgrid;
+  grid-row: span 3;
+}
+
+article h2 {
+  margin: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  line-height: 1.1;
+  text-wrap: balance;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+body.resume article {
+  background: oklch(95.01% 0.02375 262.144);
+  padding: 1.25rem;
+  border: 1px solid oklch(95.01% 0.02375 262.144);
+  margin-bottom: 1.25rem;
+
+}
+
+body.resume article h4 {
+  margin: 0;
+}
+
+body.resume article p {
+  margin: 0.25rem 0 0.5rem;
+}
+
+body.resume ul {
+  margin: 0.5rem 0 0;
+  padding-left: 1.25rem;
+}
+
+body.resume a[href*="drive.google.com"] {
+  display: inline-block;
+  padding: 0.4em 0.7em;
+  border: 1px solid oklch(85% 3% 200);
+  text-decoration: none;
+}
+
+body.resume a[href*="drive.google.com"]:hover {
+  background: oklch(from var(--color-accent) 95% 5% h);
+}
