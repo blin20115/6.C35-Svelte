@@ -56,7 +56,10 @@
     <h2>Discoveries and Insights</h2>
 
     <figure>
-        <img src="images/figure 1.png" alt="Greater Boston HOLC Map" />
+        <img
+            src={`${base}/images/figure 1.png`}
+            alt="Greater Boston HOLC Map"
+        />
         <figcaption>
             Figure 1. HOLC Categories Across Greater Boston — Red indicates
             hazardous “D” grade areas, while green indicates “A” graded
@@ -83,7 +86,7 @@
 
     <figure>
         <img
-            src="images/figure 2.png"
+            src={`${base}/images/figure 2.png`}
             alt="Number of Areas in HOLC City Survey Programs"
         />
         <figcaption>
@@ -113,7 +116,7 @@
 
     <figure>
         <img
-            src="images/figure 3.png"
+            src={`${base}/images/figure 3.png`}
             alt="Grades for Areas of Boston Cities"
         />
         <figcaption>
@@ -139,7 +142,7 @@
 
     <figure>
         <img
-            src="images/figure 4.png"
+            src={`${base}/images/figure 4.png`}
             alt="Cities with Best and Worst HOLC Grades"
         />
         <figcaption>
@@ -188,7 +191,7 @@
 
     <figure>
         <img
-            src="images/figure 5.png"
+            src={`${base}/images/figure 5.png`}
             alt="Areas and Their Corresponding Grades"
         />
         <figcaption>
@@ -251,7 +254,7 @@
 
     <figure>
         <img
-            src="images/figure 6.png"
+            src={`${base}/images/figure 6.png`}
             alt="Grades for Areas of Boston Cities (Liberal vs Evenly Split)"
         />
         <figcaption>

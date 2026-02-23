@@ -32,7 +32,7 @@
 </p>
 
 <img
-    src="images/IMG_1229.JPG"
+    src={`${base}/images/IMG_1229.JPG`}
     alt="Here's a picture of me in front of MIT on Mass Ave, with the address,
     77 Massachusetts Avenue!"
     width="600"
