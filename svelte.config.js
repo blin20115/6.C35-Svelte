@@ -5,7 +5,7 @@ const config = {
 	kit: {
 		adapter: adapter({ fallback: '404.html' }),
 		paths: {
-			base: process.argv.includes('dev') ? '' : '/6.C35-Lab-3'
+			base: process.argv.includes('dev') ? '' : '/6.C35-Svelte'
 		}
 	}
 };
