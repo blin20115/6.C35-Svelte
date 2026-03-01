@@ -8,22 +8,6 @@
 
 <h1>Resume</h1>
 
-<nav>
-  <ul>
-    <li><a href={`${base}/`}>Home</a></li>
-    <li><a href={`${base}/projects`}>Projects</a></li>
-    <li><a href={`${base}/A2`}>Assignment 2</a></li>
-    <li><a href={`${base}/A3`}>Assignment 3</a></li>
-    <li><a href={`${base}/contact`}>Contact</a></li>
-    <li><a class="current" href={`${base}/resume`}>Resume</a></li>
-    <li>
-      <a href="https://github.com/blin20115" target="_blank" rel="noreferrer"
-        >Github</a
-      >
-    </li>
-  </ul>
-</nav>
-
 <h4>
   <a
     href="https://drive.google.com/file/d/1qnaWYsIOCNXOS29om2rZQBUuWrLEVJ5J/view?usp=sharing"
