@@ -3,6 +3,18 @@
     import { page } from "$app/stores";
     import "../style.css";
 
+    let colorScheme = "light dark";
+    let root = globalThis.document?.documentElement;
+
+    let localStorage = globalThis.localStorage ?? {};
+
+    if (localStorage.colorScheme) {
+        colorScheme = localStorage.colorScheme;
+    }
+
+    $: root?.style.setProperty("color-scheme", colorScheme);
+    $: localStorage.colorScheme = colorScheme;
+
     let pages = [
         { url: "/", title: "Home" },
         { url: "/projects", title: "Projects" },
@@ -13,6 +25,15 @@
         { url: "https://github.com/blin20115", title: "Github" },
     ];
 </script>
+
+<label class="color-scheme-switch">
+    Theme:
+    <select bind:value={colorScheme}>
+        <option value="light dark">Automatic</option>
+        <option value="light">Light</option>
+        <option value="dark">Dark</option>
+    </select>
+</label>
 
 <nav>
     <ul>
@@ -37,15 +58,30 @@
 <slot />
 
 <style>
+    :global(:root) {
+        color-scheme: light dark;
+    }
+
+    .color-scheme-switch {
+        position: absolute;
+        top: 1rem;
+        right: 1rem;
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 80%;
+    }
+
     nav ul,
     nav ul li {
         display: contents;
     }
 
     nav {
+        --border-color: oklch(50% 10% 200 / 40%);
         display: flex;
         margin-bottom: 1em;
-        border-bottom: 1px solid oklch(80% 3% 200);
+        border-bottom: 2px solid var(--border-color);
     }
 
     nav a {
@@ -58,13 +94,13 @@
     }
 
     nav a.current {
-        border-bottom: 0.4em solid oklch(80% 3% 200);
+        border-bottom: 0.4em solid var(--border-color);
         padding-bottom: 0.1em;
     }
 
     nav a:hover {
         border-bottom: 0.4em solid var(--color-accent);
-        background-color: oklch(from var(--color-accent) 95% 5% h);
+        background-color: color-mix(in oklch, var(--color-accent), canvas 85%);
         padding-bottom: 0.1em;
     }
 </style>
