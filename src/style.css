@@ -20,12 +20,14 @@ nav ul li {
 
 nav {
   display: flex;
+  flex-wrap: nowrap;
   margin-bottom: 1em;
   border-bottom: 1px solid oklch(80% 3% 200);
 }
 
 nav a {
   flex: 1;
+  white-space: nowrap;
   text-decoration: none;
   color: inherit;
   text-align: center;

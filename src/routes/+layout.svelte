@@ -20,6 +20,7 @@
         { url: "/projects", title: "Projects" },
         { url: "/A2", title: "Assignment 2" },
         { url: "/A3", title: "Assignment 3" },
+        { url: "/A4", title: "Assignment 4" },
         { url: "/contact", title: "Contact" },
         { url: "/resume", title: "Resume" },
         { url: "https://github.com/blin20115", title: "Github" },
