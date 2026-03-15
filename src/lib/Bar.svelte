@@ -4,7 +4,7 @@
     let width = 400;
     let height = 300;
 
-    let margin = { top: 60, right: 20, bottom: 50, left: 60 };
+    let margin = { top: 80, right: 20, bottom: 50, left: 60 };
     let innerWidth = width - margin.left - margin.right;
     let innerHeight = height - margin.top - margin.bottom;
 

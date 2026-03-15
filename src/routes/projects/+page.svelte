@@ -30,6 +30,7 @@
       (v) => v.length,
       (d) => d.year,
     )
+    .sort((a, b) => a[0] - b[0])
     .map(([year, count]) => ({ label: String(year), value: count }));
 </script>
 
