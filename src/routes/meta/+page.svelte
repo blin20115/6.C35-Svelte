@@ -52,6 +52,8 @@
                 };
             });
 
+        commits = d3.sort(commits, (d) => -d.totalLines);
+
         barData = d3
             .rollups(
                 locData,
@@ -76,6 +78,11 @@
         .scaleLinear()
         .domain([24, 0])
         .range([usableArea.bottom, usableArea.top]);
+
+    $: rScale = d3
+        .scaleSqrt()
+        .domain(d3.extent(commits, (d) => d.totalLines))
+        .range([5, 30]);
 
     $: {
         d3.select(xAxis).call(d3.axisBottom(xScale));
@@ -111,8 +118,9 @@
             <circle
                 cx={xScale(commit.datetime)}
                 cy={yScale(commit.hourFrac)}
-                r="5"
+                r={rScale(commit.totalLines)}
                 fill="steelblue"
+                fill-opacity="0.5"
             />
         {/each}
     </g>
