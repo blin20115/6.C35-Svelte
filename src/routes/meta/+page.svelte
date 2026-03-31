@@ -3,6 +3,7 @@
     import { onMount } from "svelte";
     import * as d3 from "d3";
     import BarHorizontal from "$lib/BarHorizontal.svelte";
+    import { computePosition, autoPlacement, offset } from "@floating-ui/dom";
 
     let width = 1000,
         height = 600;
@@ -21,6 +22,23 @@
     let barData = [];
 
     let xAxis, yAxis, yAxisGridlines;
+    let hoveredIndex = -1;
+    let commitTooltip;
+    let tooltipPosition = { x: 0, y: 0 };
+    $: hoveredCommit = commits[hoveredIndex] ?? hoveredCommit ?? {};
+
+    async function dotInteraction(index, evt) {
+        let hoveredDot = evt.target;
+        if (evt.type === "mouseenter") {
+            hoveredIndex = index;
+            tooltipPosition = await computePosition(hoveredDot, commitTooltip, {
+                strategy: "fixed",
+                middleware: [offset(5), autoPlacement()],
+            });
+        } else if (evt.type === "mouseleave") {
+            hoveredIndex = -1;
+        }
+    }
 
     onMount(async () => {
         locData = await d3.csv(`${base}/loc.csv`, (row) => ({
@@ -121,10 +139,38 @@
                 r={rScale(commit.totalLines)}
                 fill="steelblue"
                 fill-opacity="0.5"
+                on:mouseenter={(evt) => dotInteraction(index, evt)}
+                on:mouseleave={(evt) => dotInteraction(index, evt)}
             />
         {/each}
     </g>
 </svg>
+
+<dl
+    class="info tooltip"
+    hidden={hoveredIndex === -1}
+    style="top: {tooltipPosition.y}px; left: {tooltipPosition.x}px"
+    bind:this={commitTooltip}
+>
+    <dt>Commit</dt>
+    <dd><a href={hoveredCommit.url} target="_blank">{hoveredCommit.id}</a></dd>
+
+    <dt>Date</dt>
+    <dd>
+        {hoveredCommit.datetime?.toLocaleString("en", { dateStyle: "full" })}
+    </dd>
+
+    <dt>Time</dt>
+    <dd>
+        {hoveredCommit.datetime?.toLocaleString("en", { timeStyle: "short" })}
+    </dd>
+
+    <dt>Author</dt>
+    <dd>{hoveredCommit.author}</dd>
+
+    <dt>Lines edited</dt>
+    <dd>{hoveredCommit.totalLines}</dd>
+</dl>
 
 <BarHorizontal data={barData} />
 
@@ -135,5 +181,44 @@
 
     .gridlines {
         stroke-opacity: 0.2;
+    }
+
+    circle {
+        transition: 200ms;
+        &:hover {
+            fill: darkgreen;
+        }
+    }
+
+    dl.info {
+        display: grid;
+        grid-template-columns: auto 1fr;
+        margin: 0;
+        transition-duration: 500ms;
+        transition-property: opacity, visibility;
+    }
+
+    dl.info[hidden]:not(:hover, :focus-within) {
+        opacity: 0;
+        visibility: hidden;
+    }
+
+    dl.info dt {
+        color: gray;
+        font-size: 0.85em;
+        align-self: center;
+    }
+
+    dl.info dd {
+        margin: 0;
+        font-weight: bold;
+    }
+
+    .tooltip {
+        position: fixed;
+        background-color: white;
+        padding: 0.75em 1em;
+        border-radius: 6px;
+        box-shadow: 2px 2px 10px oklch(0% 0% 0 / 20%);
     }
 </style>
