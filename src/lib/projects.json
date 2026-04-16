@@ -1,5 +1,13 @@
 [
     {
+        "title": "BikeWatch",
+        "year": 2026,
+        "image": "images/bikewatch.png",
+        "url": "https://blin20115.github.io/BikeWatch",
+        "description": "An interactive map visualization of bike traffic in the Boston area using BlueBike data.",
+        "story": "I wanted to understand how people move through a city on bikes. Combining Mapbox, D3, and real BlueBike trip data turned out to be more interesting than I expected. Watching the circles change color and size as you scrub through different times of day made the data feel alive in a way that a spreadsheet never could."
+    },
+    {
         "title": "Personal Portfolio Website",
         "year": 2026,
         "image": "images/portfolio.png",
