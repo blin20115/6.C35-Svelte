@@ -22,8 +22,9 @@
         .range([innerHeight, 0]);
 
     $: colorScale = d3
-        .scaleOrdinal(d3.schemeTableau10)
-        .domain(data.map((d) => d.label));
+        .scaleOrdinal()
+        .domain(data.map((d) => d.label))
+        .range(d3.quantize(d3.interpolateBlues, data.length));
 
     $: maxBar = d3.greatest(data, (d) => d.value);
     $: description = `A bar chart showing project counts by year. ${data.map((d) => `${d.label}: ${d.value} projects`).join(", ")}.`;
@@ -110,6 +111,7 @@
                             : 's'}"
                         on:click={(e) => toggleBar(index, e)}
                         on:keyup={(e) => toggleBar(index, e)}
+                        stroke="black"
                     />
                 {/each}
                 {#if maxBar}
@@ -290,6 +292,8 @@
     rect {
         transition: 300ms;
         outline: none;
+        stroke: black;
+        stroke-width: 1;
     }
 
     rect:focus-visible {
