@@ -27,6 +27,14 @@
 
     $: maxBar = d3.greatest(data, (d) => d.value);
 
+    let selectedIndex = -1;
+
+    function toggleBar(index, event) {
+        if (!event.key || event.key === "Enter") {
+            selectedIndex = index;
+        }
+    }
+
     let xAxis, yAxis;
 
     $: if (xAxis && yAxis) {
@@ -59,13 +67,23 @@
             bind:this={yAxis}
         />
         <g transform="translate({margin.left}, {margin.top})">
-            {#each data as d}
+            {#each data as d, index}
                 <rect
                     x={xScale(d.label)}
                     y={yScale(d.value)}
                     width={xScale.bandwidth()}
                     height={innerHeight - yScale(d.value)}
                     fill={colorScale(d.label)}
+                    opacity={selectedIndex === -1 || selectedIndex === index
+                        ? 1
+                        : 0.45}
+                    tabindex="0"
+                    role="button"
+                    aria-label="{d.label}: {d.value} project{d.value === 1
+                        ? ''
+                        : 's'}"
+                    on:click={(e) => toggleBar(index, e)}
+                    on:keyup={(e) => toggleBar(index, e)}
                 />
             {/each}
             {#if maxBar}
@@ -169,6 +187,22 @@
         flex-shrink: 0;
     }
 
+    svg:hover rect:not(:hover),
+    .container:focus-within rect:not(:focus-visible) {
+        opacity: 50%;
+    }
+
+    rect {
+        transition: 300ms;
+        outline: none;
+    }
+
+    rect:focus-visible {
+        stroke: white;
+        stroke-width: 2px;
+        stroke-dasharray: 4;
+    }
+
     .chart-title {
         font-size: 1em;
         font-weight: bold;
@@ -182,7 +216,7 @@
 
     .annotation {
         font-size: 0.7em;
-        fill: black;
+        fill: currentColor;
         font-style: italic;
     }
 </style>
